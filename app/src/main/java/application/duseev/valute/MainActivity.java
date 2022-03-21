@@ -13,7 +13,8 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import org.json.JSONArray;
+
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,12 +27,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+
+
 import application.duseev.valute.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
-    ArrayList<Valute> userList;
+    ArrayList<Valute> currencies;
     ArrayAdapter<Valute> listAdapter;
     Handler mainHandler = new Handler();
     ProgressDialog progressDialog;
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 new fetchData().start();
             }
         });
-        binding.userList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        binding.currencyList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Valute item = (Valute) parent.getItemAtPosition(position);
@@ -62,11 +65,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
     private void initializeValuteList() {
-        userList = new ArrayList<>();
-        listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,userList);
-        binding.userList.setAdapter(listAdapter);
+        currencies = new ArrayList<>();
+        listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,currencies);
+        binding.currencyList.setAdapter(listAdapter);
     }
 
     class fetchData extends Thread{
@@ -96,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
                 if(!data.isEmpty()){
                     JSONObject jsonObject = new JSONObject(data);
                     JSONObject valute = jsonObject.getJSONObject("Valute");
-
                     nameValutes[0]="AUD";
                     nameValutes[1]="AZN";
                     nameValutes[2]="GBP";
@@ -131,15 +132,15 @@ public class MainActivity extends AppCompatActivity {
                     nameValutes[31]="ZAR";
                     nameValutes[32]="KRW";
                     nameValutes[33]="JPY";
-                    userList.clear();
+                    currencies.clear();
                     for(int i=0;i<34;i++){
                         JSONObject newValute= valute.getJSONObject(nameValutes[i]);
                         Valute Valute1 = new Valute();
                         Valute1.setCharCode(newValute.getString("CharCode"));
                         Valute1.setName(newValute.getString("Name"));
                         Valute1.setNominal(newValute.getInt("Nominal"));
-                       Valute1.setValue(newValute.getDouble("Value"));
-                        userList.add(Valute1);
+                        Valute1.setValue(newValute.getDouble("Value"));
+                        currencies.add(Valute1);
                     }
                 }
             } catch (MalformedURLException e) {

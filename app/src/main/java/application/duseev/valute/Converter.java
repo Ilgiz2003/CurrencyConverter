@@ -20,8 +20,19 @@ public class Converter extends AppCompatActivity {
     }
     public void onButtonClick(View v){
         EditText sumRubText = (EditText) findViewById(R.id.editText);
-        if (sumRubText.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Поле ввода должно быть заполнено!", Toast.LENGTH_SHORT).show();
+        String chekEditText = sumRubText.getText().toString();
+        int chekTextCounter=0;
+        for(int i=0;i<chekEditText.length();i++){
+            if(chekEditText.charAt(i) == '.' ){
+                chekTextCounter++;
+            }
+            if (chekEditText.charAt(0) == '.' || chekEditText.charAt(chekEditText.length()-1)=='.') {
+                chekTextCounter=2;
+            }
+        }
+
+        if (chekEditText.isEmpty() || chekTextCounter>1) {
+            Toast.makeText(this, "Поле ввода должно быть заполнено корректно!", Toast.LENGTH_SHORT).show();
         }
         else {
             TextView resText = (TextView) findViewById(R.id.result);

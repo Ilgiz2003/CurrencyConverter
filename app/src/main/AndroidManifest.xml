@@ -20,7 +20,8 @@
         </activity>
         <activity
             android:name=".Converter"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
