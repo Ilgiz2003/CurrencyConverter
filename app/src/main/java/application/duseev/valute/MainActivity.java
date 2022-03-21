@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import org.json.JSONArray;
@@ -38,11 +42,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Window w = getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         initializeValuteList();
         binding.updateData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new fetchData().start();
+            }
+        });
+        binding.userList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Valute item = (Valute) parent.getItemAtPosition(position);
+                Intent intent = new Intent(MainActivity.this, Converter.class);
+                intent.putExtra("Array_item",item);
+                startActivity(intent);
             }
         });
 
@@ -119,12 +134,11 @@ public class MainActivity extends AppCompatActivity {
                     userList.clear();
                     for(int i=0;i<34;i++){
                         JSONObject newValute= valute.getJSONObject(nameValutes[i]);
-
                         Valute Valute1 = new Valute();
-                        Valute1.CharCode = newValute.getString("CharCode");
-                        Valute1.Name = newValute.getString("Name");
-                        Valute1.Nominal = newValute.getInt("Nominal");
-                       Valute1.Value = newValute.getDouble("Value");
+                        Valute1.setCharCode(newValute.getString("CharCode"));
+                        Valute1.setName(newValute.getString("Name"));
+                        Valute1.setNominal(newValute.getInt("Nominal"));
+                       Valute1.setValue(newValute.getDouble("Value"));
                         userList.add(Valute1);
                     }
                 }

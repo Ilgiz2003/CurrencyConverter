@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Ilgiz/AndroidStudioProjects/Valute/app/src/main/res/drawable-v24/style_btn_stroke_black70_press_white.xml" value="0.1705" />
+        <entry key="..\:/Users/Ilgiz/AndroidStudioProjects/Valute/app/src/main/res/drawable/button_stroke_black70_press_white.xml" value="0.1705" />
+        <entry key="..\:/Users/Ilgiz/AndroidStudioProjects/Valute/app/src/main/res/drawable/style_btn_stroke_black70.xml" value="0.1705" />
         <entry key="..\:/Users/Ilgiz/AndroidStudioProjects/Valute/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/Ilgiz/AndroidStudioProjects/Valute/app/src/main/res/layout/converter.xml" value="0.264" />
       </map>
     </option>
   </component>
